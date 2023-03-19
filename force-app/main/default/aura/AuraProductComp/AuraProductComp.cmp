@@ -1,0 +1,74 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global"  controller="AuraCompUtilityClas">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="BrandingAssetList" type="List"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="Productlist" type="List"/>
+    <aura:attribute name="selectedLeads" type="List"/>
+    <aura:attribute name="selectedCount" type="integer" default="0"/>
+    <aura:attribute name="showErrorClass" type="boolean" default="false"/>
+    <aura:attribute name="Productcount" type="integer"/>
+    <aura:attribute name="EditMode" type="boolean" default="false" />
+    <aura:attribute name="EditEmail" type="boolean" default="false" />
+    <aura:attribute name="BBAIdString" type="String"/>
+    
+    <aura:attribute name="selectedProductList" type="List"/>
+    <aura:attribute name="AllProductIds" type="List"/>
+    
+    <aura:html tag="style">             
+        .slds-modal__container{        
+        width: 100% !important;
+        max-width: 80rem !important;
+        height : 100%; !important;
+        
+        }        
+    </aura:html>
+    
+    <div class="slds-modal__container">
+        <h2 style=" text-align: center;font-size: 25px;font-family: math;">
+            Add Products</h2>
+        <br />
+        
+        <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered" role="grid">
+            
+            <tr>
+                <th scope="col" height="22" style="width: 3rem"> Select</th>
+                <th scope="col" height="22">Product Name</th>
+                <th scope="col" height="22">Description</th>
+                <th scope="col" height="22"> Product Code</th> 
+            </tr>                      
+            
+            
+            <tbody>
+                
+                <aura:iteration items="{!v.Productlist}" var="ProductlistRec">
+                    
+                    <tr class="slds-hint-parent">
+                        <td>
+                            <!--div data-id="{!ProductlistRec.Id}" onchange="{!c.selectSinglerec}">
+                                                     <lightning:input type="checkbox" aura:id="checkContact" label=""  name="Selected Product"   value="{ProductlistRec.checkedvalue}" text="{!ProductlistRec.Id}" />
+                                                 </div-->
+                            <label class="slds-checkbox">
+                                <ui:inputCheckbox aura:id="checkProduct" value="" text="{!ProductlistRec.Id}" change="{!c.selectSingleProduct}"/>
+                                <span class="slds-checkbox--faux" />
+                                <span class="slds-form-element__label"></span>
+                            </label>
+                        </td>
+                        <th data-label="Product Name" scope="row">
+                            <div class="slds-truncate" title="{!ProductlistRec.Name}">{!ProductlistRec.Name}</div>  
+                        </th>
+                        <td data-label="Description">
+                            <div class="slds-truncate" title="{!ProductlistRec.ProductCode}">{!ProductlistRec.ProductCode}</div>
+                        </td>
+                        <td data-label="Description">
+                            <div class="slds-truncate" title="{!ProductlistRec.Description}">{!ProductlistRec.Description}</div>
+                        </td>
+                        
+                    </tr>
+                    
+                </aura:iteration> 
+            </tbody>
+        </table>
+        
+    </div>
+    
+</aura:component>

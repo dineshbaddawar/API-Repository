@@ -1,0 +1,90 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global"  controller="AuraCompUtilityClas">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="contactList" type="List"/>
+    
+     <aura:html tag="style">             
+        .slds-modal__container{        
+        width: 100% !important;
+        max-width: 80rem !important;
+        height : 100%; !important;
+        
+        }        
+    </aura:html>
+    
+    <div class="slds-modal__container">
+        <h2 style=" text-align: center;font-size: 25px;font-family: math;">
+            Branding Asset Line Item</h2>
+        <br />
+        
+        <!--lightning:datatable class="table" columns="{! v.columns }" data="{! v.data }" keyField="id" onrowselection="{! c.updateSelectedText}" /-->
+        
+        <!--contacts table part--> 
+        <table class="slds-table slds-table--bordered ">
+            <thead class="dinesh">
+                <tr class="slds-text-title--caps">
+                    <th>
+                    </th>
+                    <th>
+                        <span class="slds-truncate" title="Name">Name</span>      
+                    </th>
+                    <th>
+                        <span class="slds-truncate" title="Name">Email</span>      
+                    </th>
+                    
+                    <th>
+                        <span class="slds-truncate" title="Name">Phone</span>      
+                    </th>
+                    <!--th>
+                        <span class="slds-truncate" title="Name">Quantity</span>      
+                    </th-->
+                    <th>
+                    
+                    </th>
+                    
+                </tr>
+            </thead>
+            <!--table body start, 
+         Iterate contact list as a <tr>
+         -->
+            <tbody>
+                <aura:iteration items="{!v.contactList}" var="con" indexVar="i">
+                    <tr>
+                       
+                         <td scope="row">
+                              <input type="radio" id="{!con.Id}" name="options"  onclick="{!c.checkboxSelect}"  />
+                         <!--lightning:radioGroup  aura:id="mygroup"   keyField="id"  onchange="{!c.selectAccountRadioGroupOnChange}" options="{! v.contactList }" value="{!con.Id }" type="radio"/-->
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate" title="{!con.Name}">{!con.Name}</div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate" title="{!con.Phone}">{!con.Phone}</div>
+                        </td>
+                        
+                        <td scope="row">
+                            <div class="slds-truncate" title="{!con.Email}">{!con.Email}</div>
+                        </td>
+                        <td scope="row">
+                            <lightning:button variant="brand" label="Preview PDF" title="Brand action" onclick="{! c.handleClick }" />
+                        </td>
+                        
+                        <!--td scope="row" ondblclick="{!c.inlineEditDescription}" class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+                        <div class="slds-truncate" title="{!con.Stadium__r.Sport_Board__r.Name}"><a>{!con.Product_Available_Quantity__c}</a></div>
+                    </td-->
+                       
+  
+                    </tr>
+                </aura:iteration>
+            </tbody> 
+        </table>
+        <div class="modal-footer slds-modal__footer slds-size_1-of-1" style="width: 100%; ">
+            <div class="forceChangeRecordTypeFooter">
+                <ui:button class="slds-button slds-float_left  slds-button_neutral" label="Cancel"
+                           press="{! c.hideQuickAction}" />
+                <ui:button class="slds-button slds-button--brand" label="Save" press="{!c.SaveRecord}" />
+            </div>
+        </div>
+        
+    </div>
+    <br />
+</aura:component>
